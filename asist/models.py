@@ -65,15 +65,17 @@ class Seccion(models.Model):
 	class Meta:
 		verbose_name_plural='Secciones'
 
-	def __str__(self):
-
+	def nombre_profesor(self):
 		nompr = ""
 		for p in self.PROFESORES:
 			if p[0] == self.profesor:
 				nompr = p[1]
 				break
 
-		return "Seccion " + str(self.numero) + ", Prof. " + nompr
+		return nompr
+
+	def __str__(self):
+		return "Seccion " + str(self.numero) + ", Prof. " + self.nombre_profesor()
 
 
 
