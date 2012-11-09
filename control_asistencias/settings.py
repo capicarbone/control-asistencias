@@ -1,7 +1,8 @@
 # Django settings for control_asistencias project.
 
 
-import sys
+import os
+RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -120,7 +121,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'south'
+    'south',
+    'asist'
 )
 
 # A sample logging configuration. The only tangible logging
