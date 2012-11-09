@@ -14,7 +14,7 @@ class Clase(models.Model):
 
 	fecha = models.DateField(auto_now_add=True, help_text="Fecha de realización de la clase.")
 	descripcion = models.TextField(blank=True, help_text="Cotenido visto en clase.")
-	lugar = models.CharField(choices=LUGARES, help_text="Lugar de realización de la clase.")
+	lugar = models.CharField(max_length=1, choices=LUGARES, help_text="Lugar de realización de la clase.")
 
 class Alumno(models.Model):
 	"""Datos de un alumno"""
@@ -53,8 +53,8 @@ class Seccion(models.Model):
 		('13I' , '2013-I')
 	)
 
-	profesor = models.CharField(choices=PROFESORES)
-	materia = models.CharField(choices=MATERIA)
+	profesor = models.CharField(max_length=2, choices=PROFESORES)
+	materia = models.CharField(max_length=3, choices=MATERIA)
 	numero = models.IntegerField()
 	periodo = models.CharField(max_length=4, choices=PERIODOS)
 
