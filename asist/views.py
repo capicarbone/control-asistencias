@@ -8,7 +8,11 @@ from models import Alumno, Seccion
 import random
 
 def seccion(request, offset):
+
+
 	s = Seccion.objects.get(numero=int(offset))
+
+	
 	secciones = Seccion.objects.all()
 	alumnos = Alumno.objects.filter(seccion=s.id).order_by('nombre')
 

@@ -1,0 +1,18 @@
+<div class="navbar">
+	<div class="navbar-inner">
+		<a href="#" class="brand">Preparadurias</a>
+		<ul class="nav">
+			{% for s in secciones %}
+				{% if s.numero == seccion.numero%}
+					<li class="active">
+				{% else %}
+					<li class="">
+				{% endif %}
+					<a href="/seccion/{{s.numero}}">Sección {{s.numero}}</a>
+				</li>						
+			{% endfor %}
+			<li><a href="/clases">Resumen de clases</a></li>
+		</ul>
+	</div>
+</div>
+
