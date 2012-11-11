@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block header %}
+	<h1>Asistencias de Sección {{seccion.numero}}, Prof. {{secciones.actual.nombre_profesor}}</h1>	
+{% endblock header %}
+
+{% block contenido %}
+
+	<div class="row">
+		<div class="span12">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Cédula</th>
+						<th>Nombre y Apellido</th>							
+						<th>Asistencias</th>
+						<th>Acumulado</th>
+						<th>Nota</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for alumno in alumnos %}				
+						<tr>				
+							<td>{{alumno.cedula}}</td>
+							<td>{{alumno.nombre}} {{alumno.apellido}}</td>								
+							<td>{{alumno.asistencias_total}}/14</td>				
+							<td>
+								<div class="progress progress-info">
+									<div class="bar" style="width: {{alumno.acum}}%"></div>
+								</div>		
+							</td>
+							<td>{{alumno.nota}}</td>
+						</tr>
+					{% endfor %} 
+				</tbody>
+			</table>				
+		</div>		
+	</div>
+		
+{% endblock contenido %}

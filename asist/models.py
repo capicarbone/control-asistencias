@@ -13,9 +13,18 @@ class Clase(models.Model):
 		('L' , 'Laboratorio')
 	)
 
-	fecha = models.DateField(auto_now_add=True, help_text="Fecha de realización de la clase.")
+	fecha = models.DateField( help_text="Fecha de realización de la clase.")
 	descripcion = models.TextField(blank=True, help_text="Cotenido visto en clase.")
-	lugar = models.CharField(max_length=1, choices=LUGARES, default="L" , help_text="Lugar de realización de la clase.")
+	lugar = models.CharField(max_length=1, choices=LUGARES, default="L" , help_text="Lugar de realización de la clase.")	
+
+	def nombre_lugar(self):
+		for l in self.LUGARES:
+			if (l[0] == self.lugar):
+				return l[1]
+
+	def __unicode__(self):
+		return "Clases del %s" % (str(self.fecha))
+
 
 class Alumno(models.Model):
 	"""Datos de un alumno"""
@@ -66,12 +75,11 @@ class Seccion(models.Model):
 		verbose_name_plural='Secciones'
 
 	def nombre_profesor(self):
-		nompr = ""
+		
 		for p in self.PROFESORES:
 			if p[0] == self.profesor:
-				nompr = p[1]
-				break
-
+				return p[1]
+				
 		return nompr
 
 	def __str__(self):

@@ -3,75 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Asistencias de Sección</title>
-	<link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.min.css">	
+	<link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.min.css">		
 </head>
-<body>
-	<!-- <div class="container">
-		<ul class="nav">
-			<li><a href="">Sección 3</a></li>
-			<li><a href="">Sección 4</a></li>
-			<li><a href="">Sección 5</a></li>
-		</ul>
-	</div> -->
+<body>			
 	<div class="container">
-
-		<div class="navbar">
-			<div class="navbar-inner">
-				<a href="#" class="brand">Preparadurias</a>
-				<ul class="nav">
-					{% for s in secciones %}
-						{% if s.numero == seccion.numero%}
-							<li class="active">
-						{% else %}
-							<li class="">
-						{% endif %}
-							<a href="/seccion/{{s.numero}}">Sección {{s.numero}}</a>
-						</li>						
-					{% endfor %}
-					
-					<li><a href="/clases">Resumen de clases</a></li>
-				</ul>
-			</div>
-		</div>
+		{% include 'in-nav.html' %}		
 		<div class="row">
 			<div class="page-header">
-				<h1>Asistencias de Sección {{seccion.numero}}, Prof. {{seccion.nombre_profesor}}</h1>
+				{% block header %}{% endblock header %}
 			</div>
 		</div>	
-		<div class="row">
-			<div class="span12">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Cédula</th>
-							<th>Nombre y Apellido</th>							
-							<th>Asistencias</th>
-							<th>Acumulado</th>
-							<th>Nota</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for alumno in alumnos %}				
-							<tr>				
-								<td>{{alumno.cedula}}</td>
-								<td>{{alumno.nombre}} {{alumno.apellido}}</td>								
-								<td>{{alumno.asistencias_total}}/14</td>				
-								<td>
-									<div class="progress progress-info">
-										<div class="bar" style="width: {{alumno.acum}}%"></div>
-									</div>		
-								</td>
-								<td>{{alumno.nota}}</td>
-							</tr>
-						{% endfor %} 
-					</tbody>
-				</table>				
-			</div>
-			
-		</div>
-	</div>
-	
-
+		
+		{% block contenido %}{% endblock contenido %}
+		
+	</div>		
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+	<script type="text/javascript" scr="{{STATIC_URL}}JS/helpers.js"></script>
 </body>
 </html>

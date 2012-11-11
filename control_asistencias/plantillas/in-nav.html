@@ -1,9 +1,13 @@
+{% comment %}
+	Barra de navegación
+{% endcomment %}
+
 <div class="navbar">
 	<div class="navbar-inner">
 		<a href="#" class="brand">Preparadurias</a>
 		<ul class="nav">
 			{% for s in secciones %}
-				{% if s.numero == seccion.numero%}
+				{% if s.numero == secciones.actual.numero %}
 					<li class="active">
 				{% else %}
 					<li class="">

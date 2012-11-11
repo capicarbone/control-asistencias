@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block header %}
+	<h1>Clases realizadas</h1>
+{% endblock header %}
+
+{% block contenido %}
+
+	{{claseForm.errors}}
+	
+	{% if  admin %}
+		<div class="row">
+			<div class="span12">
+				<div class="btn-toolbar">
+					<a class="btn btn-primary" href="#claseForm" data-toggle="modal"><i class="icon-facetime-video icon-white"></i>  Nueva clase</a>
+				</div>							
+			</div>							
+		</div>
+	{% endif %}	
+	
+	<div class="row">
+		<div class="span12">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Lugar</th>
+						<th>Contenido revisado</th>
+						<th>N° Asistentes</th>
+						{% if admin %}
+							<th></th>	
+						{% endif %}						
+					</tr>
+				</thead>
+				<tbody>
+					{% for c in clases  %}
+						<tr>
+							<td>{{c.fecha}}</td>
+							<td>{{c.nombre_lugar}}</td>
+							<td>{{c.descripcion}}</td>
+							<td>{{c.asistentes}}</td>							
+							{% if admin %}
+								<td>
+									<div class="btn-group">
+										<button class="btn">
+											<i class="icon-signal"></i>										
+										</button>																	
+										<button class="btn">
+											<i class="icon-remove"></i>
+										</button>
+									</div>
+								</td>	
+							{% endif %}
+							
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	{% comment %}
+		Modal con el formulario para una clase nueva.
+	{% endcomment %}
+	
+	<div id="claseForm" class="modal hide fade">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
+			<h3>Registro de clase</h3>			
+		</div>
+		<form id="formClase" action="" method="post" style="margin: 0px">{% csrf_token %}
+			<div class="modal-body">					
+				<div class="form-horizontal" >
+					<fieldset>
+						{% for f in claseForm %}							
+							<div class="control-group">
+								<label for="id_{{f.html_name}}" class="control-label">{{f.label}}</label>
+								<div class="controls">
+									{{f}}		
+									<span class="help-block">{{f.help_text}}</span> 
+								</div>
+							</div>																		
+						{% endfor %}
+					</fieldset>				
+				</div>															
+			</div>		
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</div>
+		</form>				
+	</div>
+	
+{% endblock contenido %}
