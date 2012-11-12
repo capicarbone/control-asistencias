@@ -9,21 +9,24 @@ from forms import ClaseForm
 
 import random
 
+NUM_SEMANAS = 10
+
 def seccion(request, offset):
 
 	s = Seccion.objects.get(numero=int(offset))
-
 	
 	secciones = Seccion.objects.all()
 	secciones.actual = s
 	alumnos = Alumno.objects.filter(seccion=s.id).order_by('nombre')
 
 	for al in alumnos:
-		al.asistencias_total = random.randrange(1,14)
-		al.acum = int(al.asistencias_total*100 / 14)
-		al.nota = int(al.asistencias_total*5/14)
+		al.asistencias_total = Asistencia.objects.filter(alumno=al.id).filter(punto=True).count()
+		al.acum = int(al.asistencias_total*100 / NUM_SEMANAS)
+		al.nota = int(al.asistencias_total*5/ NUM_SEMANAS)
 
-	return render_to_response('consulta_seccion.html', {'alumnos': alumnos,'secciones': secciones}, context_instance=RequestContext(request) )
+	return render_to_response('consulta_seccion.html', 
+		{'alumnos': alumnos,'secciones': secciones, 'num_semanas': NUM_SEMANAS}, 
+		context_instance=RequestContext(request) )
 
 
 def registro_asistencias(request):
@@ -63,17 +66,31 @@ def consultar_clases(request):
 		admin = False
 
 	return render_to_response('consulta_clases.html' , 
-		{'clases': clases, 'secciones': secciones, 'admin': admin , 'claseForm' : claseForm },
+		{'clases': clases, 'secciones': secciones, 'admin': admin , 'claseForm' : claseForm, 'clases_pag': True },
 		context_instance=RequestContext(request))
 
 def registro_asistencias(request, clase_num):
 
 	alumnos = Alumno.objects.all().order_by('nombre')
+
+	if request.method == 'POST':
+		form = request.POST
+		clase_id = clase_num
+		for alumno in alumnos:			
+			if form.get('participacion_' + str(alumno.id)):							
+				a = Asistencia(clase_id=clase_id, alumno_id=alumno.id, punto=True)
+				a.save()
+			elif form.get('asistencia_' + str(alumno.id)):
+				a = Asistencia(clase_id=clase_id, alumno_id=alumno.id, punto=False)
+				a.save()
+
+		return redirect('/clases')
+
 	clase = Clase.objects.get(pk=clase_num)
 	secciones = Seccion.objects.all().order_by('numero')
 
 	return render_to_response('registro_asistencia.html', 
-		{'secciones': secciones, 'alumnos': alumnos, 'clase': clase},
+		{'secciones': secciones, 'alumnos': alumnos, 'clase': clase, 'clases_pag': True },
 		context_instance=RequestContext(request))
 
 

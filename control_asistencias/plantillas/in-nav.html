@@ -15,7 +15,14 @@
 					<a href="/seccion/{{s.numero}}">Sección {{s.numero}}</a>
 				</li>						
 			{% endfor %}
-			<li><a href="/clases">Resumen de clases</a></li>
+			
+			{% if clases_pag %}
+				<li class="active">
+			{% else %}
+				<li>
+			{% endif %}			
+				<a href="/clases">Resumen de clases</a>
+			</li>
 		</ul>
 	</div>
 </div>

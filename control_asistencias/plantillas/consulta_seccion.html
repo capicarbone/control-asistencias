@@ -1,11 +1,25 @@
 {% extends "base.html" %}
 
 {% block header %}
-	<h1>Asistencias de Sección {{seccion.numero}}, Prof. {{secciones.actual.nombre_profesor}}</h1>	
+	<h1>Asistencias de Sección {{secciones.actual.numero}}, Prof. {{secciones.actual.nombre_profesor}}</h1>	
 {% endblock header %}
 
 {% block contenido %}
-
+	
+	<div class="row">
+		<div class="span12">
+			<div class="navbar">
+				<div class="navbar-inner">					
+					<ul class="nav">											
+						<li class="form-search">							
+							<a><input type="text" class="input-xxlarge search-query" placeholder="Introduzca su nombre"></a>						
+						</li>						
+					</ul>
+				</div>
+			</div>				
+		</div>
+	</div>
+	
 	<div class="row">
 		<div class="span12">
 			<table class="table table-hover">
@@ -23,9 +37,17 @@
 						<tr>				
 							<td>{{alumno.cedula}}</td>
 							<td>{{alumno.nombre}} {{alumno.apellido}}</td>								
-							<td>{{alumno.asistencias_total}}/14</td>				
+							<td>{{alumno.asistencias_total}}/{{num_semanas}}</td>				
 							<td>
-								<div class="progress progress-info">
+								{% if  alumno.acum <= 35 %}
+									<div class="progress progress-danger">									
+								{% elif alumno.acum < 80 %}
+									<div class="progress progress-warning">
+								{% elif alumno.acum >= 80 and alumno.acum < 100 %}
+									<div class="progress progress-success">
+								{% elif alumno.acum >= 100 %}				
+									<div class="progress progress-info">						
+								{% endif %}																	
 									<div class="bar" style="width: {{alumno.acum}}%"></div>
 								</div>		
 							</td>
