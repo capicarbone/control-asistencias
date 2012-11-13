@@ -12,7 +12,7 @@
 				<div class="navbar-inner">					
 					<ul class="nav">											
 						<li class="form-search">							
-							<a><input type="text" class="input-xxlarge search-query" placeholder="Introduzca su nombre"></a>						
+							<a><input type="text" class="input-xxlarge search-query" placeholder="Búscate, introduce tu nombre y/o apellido"></a>						
 						</li>						
 					</ul>
 				</div>
@@ -34,9 +34,9 @@
 				</thead>
 				<tbody>
 					{% for alumno in alumnos %}				
-						<tr>				
-							<td>{{alumno.cedula}}</td>
-							<td>{{alumno.nombre}} {{alumno.apellido}}</td>								
+						<tr class="alumno">				
+							<td class="alumno_cedula">{{alumno.cedula}}</td>
+							<td class="alumno_nombre_completo">{{alumno.nombre}} {{alumno.apellido}}</td>								
 							<td>{{alumno.asistencias_total}}/{{num_semanas}}</td>				
 							<td>
 								{% if  alumno.acum <= 35 %}
@@ -57,6 +57,10 @@
 				</tbody>
 			</table>				
 		</div>		
-	</div>
+	</div>	
 		
 {% endblock contenido %}
+
+{% block js %}
+	<script src='{{STATIC_URL}}js/bb-busqueda_alumno.js'/></script>		
+{% endblock js %}

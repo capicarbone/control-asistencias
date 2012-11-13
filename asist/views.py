@@ -93,8 +93,10 @@ def registro_asistencias(request, clase_num):
 		{'secciones': secciones, 'alumnos': alumnos, 'clase': clase, 'clases_pag': True },
 		context_instance=RequestContext(request))
 
+def consulta_alumno(request, id):
 
-
+	alumno = Alumno.objects.get(pk=int(id))
+	
 
 
 
