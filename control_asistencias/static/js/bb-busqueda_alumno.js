@@ -33,8 +33,11 @@
 
 			regex = "^\\D*" + busqueda + "\\D*";
 
-			if (this.alumno.get('nombre').match(regex) || this.alumno.get('apellido').match(regex))
+			if (this.alumno.get('nombre').match(regex) || this.alumno.get('apellido').match(regex)){
+				this.$el.show();			
 				console.log(this.alumno.get('nombre'));
+			}else
+				this.$el.hide();
 		}
 
 	});
@@ -42,26 +45,38 @@
 	var BusquedaView = Backbone.View.extend({
 
 		AlumnoView: null,
-		alumnos: null,
+		alumnos: [],
+
 
 		initialize: function(){
 
+
 			this.AlumnoView = this.options.view
-			alumnos = new this.AlumnoView({
-				el: ".alumno",
-				ModelPrimario: this.options.AlumnoModel
-			});
+
+			for (var i = $(".alumno").length - 1; i >= 0; i--) {
+				
+				this.alumnos[i] = new this.AlumnoView({
+					el: ".alumno:eq(" + i +")",
+					ModelPrimario: this.options.AlumnoModel					
+				});
+
+				console.log(this.alumnos[i].el)
+
+			};						
 
 		},
 
 		events:{
-			"change .form-search" : "filtar_alumnos"
+			"blur .form-search" : "filtar_alumnos"
 		},
 
 		filtar_alumnos: function(){
+			
+			for (var i = this.alumnos.length - 1; i >= 0; i--) {
+				this.alumnos[i].auto_filtrar(this.$(".search-query")[0].value);
+			};
 
-			//console.log(this.$(".search-query")[0].value)
-			alumnos.auto_filtrar(this.$(".search-query")[0].value);
+			// alumnos.auto_filtrar(this.$(".search-query")[0].value);
 		}
 	});
 
