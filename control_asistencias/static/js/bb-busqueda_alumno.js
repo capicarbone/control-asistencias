@@ -1,6 +1,7 @@
 
 
 // Esta archivo requiere de Backbone.js
+
 (function(){
 
 	window.ca = {};
@@ -31,13 +32,13 @@
 
 		auto_filtrar: function(busqueda){
 
-			regex = "^\\D*" + busqueda + "\\D*";
+			regex = "^\\D*(" + busqueda[0].toLowerCase() + "|" + busqueda[0].toUpperCase() + ")" + busqueda.substr(1) + "\\D*";
+			console.log(regex);
 
 			if (this.alumno.get('nombre').match(regex) || this.alumno.get('apellido').match(regex)){
-				this.$el.show();			
-				console.log(this.alumno.get('nombre'));
+				this.$el.show("slow");							
 			}else
-				this.$el.hide();
+				this.$el.hide("slow");
 		}
 
 	});
@@ -67,10 +68,12 @@
 		},
 
 		events:{
-			"blur .form-search" : "filtar_alumnos"
+			"keyup .form-search" : "filtar_alumnos"
 		},
 
 		filtar_alumnos: function(){
+
+			console.log(this.$(".search-query")[0].value);
 			
 			for (var i = this.alumnos.length - 1; i >= 0; i--) {
 				this.alumnos[i].auto_filtrar(this.$(".search-query")[0].value);

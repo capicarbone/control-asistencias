@@ -1,0 +1,81 @@
+
+{% extends "base.html" %}
+
+{% block header %}
+	<h1>{{alumno.nombre}} {{alumno.apellido}}</h1>	
+{% endblock header %}
+
+{% block contenido %}
+
+	<div class="row">
+		<div class="span12">
+					
+			{% if  alumno.acum <= 35 %}
+				<div class="progress progress-danger">									
+			{% elif alumno.acum < 80 %}
+				<div class="progress progress-warning">
+			{% elif alumno.acum >= 80 and alumno.acum < 100 %}
+				<div class="progress progress-success">
+			{% elif alumno.acum >= 100 %}				
+				<div class="progress progress-info">						
+			{% endif %}																	
+					<div class="bar" style="width: {{alumno.acum}}%"></div>
+				</div>
+		</div>				
+	</div>	
+
+	<div class="row">
+		<div class="span12">
+			<h2>Clases asistidas</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="td">Fecha</th>
+						<th class="td">Contenido visto</th>
+						<th class="td">Lugar</th>
+						<th class="td">Nota</th>	
+					</tr>					
+				</thead>
+				<tbody>
+					{% for clase in asistencias  %}
+						<tr>
+							<td>{{clase.fecha}}</td>
+							<td>{{clase.descripcion}}</td>
+							<td>{{clase.nombre_lugar}}</td>
+							<td>
+								{% if clase.punto %}
+									<span class="badge badge-success">Si</span>
+								{% else %}
+									<span class="badge badge-important">No</span>
+								{% endif %}								
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="span12">
+			<h2>Clases no asistidias</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Contenido visto</th>
+						<th>Lugar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{clase.fecha}}</td>
+						<td>{{clase.descripcion}}</td>
+						<td>{{clase.nombre_lugar}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>	
+	
+	
+{% endblock contenido %}

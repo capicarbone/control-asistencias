@@ -33,26 +33,28 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for alumno in alumnos %}				
-						<tr class="alumno">				
-							<td class="alumno_cedula">{{alumno.cedula}}</td>
-							<td class="alumno_nombre_completo">{{alumno.nombre}} {{alumno.apellido}}</td>								
-							<td>{{alumno.asistencias_total}}/{{num_semanas}}</td>				
-							<td>
-								{% if  alumno.acum <= 35 %}
-									<div class="progress progress-danger">									
-								{% elif alumno.acum < 80 %}
-									<div class="progress progress-warning">
-								{% elif alumno.acum >= 80 and alumno.acum < 100 %}
-									<div class="progress progress-success">
-								{% elif alumno.acum >= 100 %}				
-									<div class="progress progress-info">						
-								{% endif %}																	
-									<div class="bar" style="width: {{alumno.acum}}%"></div>
-								</div>		
-							</td>
-							<td>{{alumno.nota}}</td>
-						</tr>
+					{% for alumno in alumnos %}		
+						 <a href="{% url asist.views.consulta_alumno secciones.actual.numero alumno.id %}"> 
+							<tr class="alumno" >				
+								<td class="alumno_cedula">{{alumno.cedula}}</td>
+								<td class="alumno_nombre_completo">{{alumno.nombre}} {{alumno.apellido}}</td>								
+								<td>{{alumno.asistencias_total}}/{{num_semanas}}</td>				
+								<td>
+									{% if  alumno.acum <= 35 %}
+										<div class="progress progress-danger">									
+									{% elif alumno.acum < 80 %}
+										<div class="progress progress-warning">
+									{% elif alumno.acum >= 80 and alumno.acum < 100 %}
+										<div class="progress progress-success">
+									{% elif alumno.acum >= 100 %}				
+										<div class="progress progress-info">						
+									{% endif %}																	
+										<div class="bar" style="width: {{alumno.acum}}%"></div>
+									</div>		
+								</td>
+								<td>{{alumno.nota}}</td>
+							</tr>
+						</a>								
 					{% endfor %} 
 				</tbody>
 			</table>				

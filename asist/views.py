@@ -2,14 +2,13 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
+from django.conf import settings
 
 from models import Alumno, Seccion, Clase, Asistencia
 
 from forms import ClaseForm
 
 import random
-
-NUM_SEMANAS = 10
 
 def seccion(request, offset):
 
@@ -20,12 +19,10 @@ def seccion(request, offset):
 	alumnos = Alumno.objects.filter(seccion=s.id).order_by('nombre')
 
 	for al in alumnos:
-		al.asistencias_total = Asistencia.objects.filter(alumno=al.id).filter(punto=True).count()
-		al.acum = int(al.asistencias_total*100 / NUM_SEMANAS)
-		al.nota = int(al.asistencias_total*5/ NUM_SEMANAS)
+		al.calcular_acumulado()
 
 	return render_to_response('consulta_seccion.html', 
-		{'alumnos': alumnos,'secciones': secciones, 'num_semanas': NUM_SEMANAS}, 
+		{'alumnos': alumnos,'secciones': secciones, 'num_semanas': settings.SEMANAS_TOTALES}, 
 		context_instance=RequestContext(request) )
 
 
@@ -93,9 +90,30 @@ def registro_asistencias(request, clase_num):
 		{'secciones': secciones, 'alumnos': alumnos, 'clase': clase, 'clases_pag': True },
 		context_instance=RequestContext(request))
 
-def consulta_alumno(request, id):
+def consulta_alumno(request, id_seccion, id_alumno ):
 
-	alumno = Alumno.objects.get(pk=int(id))
+	secciones = Seccion.objects.all().order_by('numero')
+	alumno = Alumno.objects.get(pk=int(id_alumno))
+	alumno.calcular_acumulado()
+
+	clases_asistidas = Clase.objects.filter(asistencia__alumno__id=alumno.id)
+
+	for c in clases_asistidas:
+		c.punto = Asistencia.objects.get(alumno_id=alumno.id, clase_id=c.id).punto
+
+	id_clases = []
+
+	for a in clases_asistidas:
+		id_clases.append(a.id)
+
+	inasistencias = Clase.objects.exclude(pk__in=id_clases)
+
+	return render_to_response('consulta_alumno.html', {'asistencias': clases_asistidas, 
+		'inasistencias': inasistencias, 'alumno': alumno, 'secciones': secciones}, 
+		context_instance=RequestContext(request))
+
+
+
 	
 
 

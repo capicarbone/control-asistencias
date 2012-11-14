@@ -1,5 +1,7 @@
 #encoding:utf-8 
 
+from django.conf import settings
+
 from django.db import models
 from django.utils.encoding  import smart_unicode
 
@@ -35,6 +37,12 @@ class Alumno(models.Model):
 	seccion = models.ForeignKey("Seccion")
 	asistencias = models.ManyToManyField(Clase, through='Asistencia')
 
+	def calcular_acumulado(self):
+		self.asistencias_total = Asistencia.objects.filter(alumno=self.id).filter(punto=True).count()
+		self.acum = int(self.asistencias_total*100 / settings.SEMANAS_TOTALES)
+		self.nota = int(self.asistencias_total*5/ settings.SEMANAS_TOTALES)
+
+
 	def __unicode__(self):
 		return smart_unicode("%s %s, Sec. %s " % (self.nombre, self.apellido, str(self.seccion.numero )))
 
@@ -45,6 +53,9 @@ class Asistencia(models.Model):
 	alumno = models.ForeignKey('Alumno')
 	clase = models.ForeignKey('Clase')
 	punto = models.BooleanField()
+
+	class Meta:
+		unique_together = ("alumno","clase")
 
 class Seccion(models.Model):
 
