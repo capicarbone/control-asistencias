@@ -1,14 +1,37 @@
 
 {% extends "base.html" %}
 
-{% block header %}
-	<h1>{{alumno.nombre}} {{alumno.apellido}}</h1>	
+{% block botonera_top %}
+
+	<div class="row">
+		<div class="span12">
+			<div class="btn-toolbar">
+				<a class="btn" href="{% url asist.views.seccion seccion_num  %}">
+					<i class="icon-chevron-left"></i>
+					Regresar 
+				</a>
+			</div>							
+		</div>							
+	</div>
+
+ 
+{% endblock botonera_top %}
+
+
+
+{% block header %}	
+
+	
+		<h1>{{alumno.nombre}} {{alumno.apellido}}</h1>	
+		<h4>C.I. {{alumno.cedula}}</h4>	
+	
+		
 {% endblock header %}
 
 {% block contenido %}
 
 	<div class="row">
-		<div class="span12">
+		<div class="span11">
 					
 			{% if  alumno.acum <= 35 %}
 				<div class="progress progress-danger">									
@@ -21,8 +44,30 @@
 			{% endif %}																	
 					<div class="bar" style="width: {{alumno.acum}}%"></div>
 				</div>
-		</div>				
+		</div>		
+		<div class="span1">
+			<h3>{{alumno.acum}} % </h3>
+		</div>		
 	</div>	
+	
+	<div class="row">
+		<div class="span12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Asistencias</th>
+						<th>Nota acumulada</th>
+						<th>Otra nota</th>
+					</tr>
+				</thead>
+				<tbody>
+					<td>{{alumno.asistencias_total}} / {{num_semanas}} </td>
+					<td>{{alumno.nota}}</td>
+					<td></td>
+				</tbody>
+			</table>
+		</div>		
+	</div>
 
 	<div class="row">
 		<div class="span12">

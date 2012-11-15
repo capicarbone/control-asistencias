@@ -109,7 +109,8 @@ def consulta_alumno(request, id_seccion, id_alumno ):
 	inasistencias = Clase.objects.exclude(pk__in=id_clases)
 
 	return render_to_response('consulta_alumno.html', {'asistencias': clases_asistidas, 
-		'inasistencias': inasistencias, 'alumno': alumno, 'secciones': secciones}, 
+		'inasistencias': inasistencias, 'alumno': alumno, 'secciones': secciones, 
+		'seccion_num': id_seccion, 'num_semanas': settings.SEMANAS_TOTALES }, 
 		context_instance=RequestContext(request))
 
 

@@ -2,6 +2,7 @@
 
 {% block header %}
 	<h1>Asistencias de Sección {{secciones.actual.numero}}, Prof. {{secciones.actual.nombre_profesor}}</h1>	
+		
 {% endblock header %}
 
 {% block contenido %}
@@ -33,9 +34,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for alumno in alumnos %}		
-						 <a href="{% url asist.views.consulta_alumno secciones.actual.numero alumno.id %}"> 
-							<tr class="alumno" >				
+					{% for alumno in alumnos %}								 
+							<tr class="alumno" >	
+								
 								<td class="alumno_cedula">{{alumno.cedula}}</td>
 								<td class="alumno_nombre_completo">{{alumno.nombre}} {{alumno.apellido}}</td>								
 								<td>{{alumno.asistencias_total}}/{{num_semanas}}</td>				
@@ -53,8 +54,14 @@
 									</div>		
 								</td>
 								<td>{{alumno.nota}}</td>
+								<td>
+									<a class="btn" href="{% url asist.views.consulta_alumno secciones.actual.numero alumno.id %}">
+										<i class="icon-check"></i>
+									</a>	
+								</td>
+								
 							</tr>
-						</a>								
+														
 					{% endfor %} 
 				</tbody>
 			</table>				

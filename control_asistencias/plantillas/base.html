@@ -8,10 +8,26 @@
 <body>			
 	<div class="container">
 		{% include 'in-nav.html' %}		
+		
+		{% block botonera_top %}{% endblock botonera_top %}
+		
 		<div class="row">
-			<div class="page-header">
-				{% block header %}{% endblock header %}
+			<div class="span10">
+				<div class="page-header">
+					{% block header %}{% endblock header %}
+				</div>					
 			</div>
+			<div class="span2">
+					
+					<div class="btn-toolbar">
+						<a class="btn" href="{% url asist.views.seccion seccion_num  %}">
+							<i class="icon-chevron-left"></i>
+							Regresar 
+						</a>
+					</div>							
+					
+				</div>
+			
 		</div>	
 		
 		{% block contenido %}{% endblock contenido %}
