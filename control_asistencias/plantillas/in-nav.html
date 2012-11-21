@@ -2,7 +2,7 @@
 	Barra de navegación
 {% endcomment %}
 
-<div class="navbar">
+<nav class="navbar">
 	<div class="navbar-inner">
 		<a href="#" class="brand">Preparadurias</a>
 		<ul class="nav">
@@ -13,7 +13,8 @@
 					<li class="">
 				{% endif %}
 					<a href="/seccion/{{s.numero}}">Sección {{s.numero}}</a>
-				</li>						
+					<span class="tooltip-data">Sección {{s.numero }}, Prof. {{s.nombre_profesor}}</span>		
+				</li>							
 			{% endfor %}
 			
 			{% if clases_pag %}
@@ -21,9 +22,10 @@
 			{% else %}
 				<li>
 			{% endif %}			
-				<a href="/clases">Resumen de clases</a>
+				<a id="resumen-clases-id" href="/clases">Resumen de clases</a>
+				<span class="tooltip-data">Detalles de clases realizadas</span>		
 			</li>
 		</ul>
 	</div>
-</div>
+</nav>
 

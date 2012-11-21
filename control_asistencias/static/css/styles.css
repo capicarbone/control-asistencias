@@ -1,5 +1,10 @@
 
-table#resumen-alumno th,
-table#resumen-alumno td{
+.cells-center th,
+.cells-center td{
 	text-align: center;
+}
+
+.no-visible, .tooltip-data{
+	visibility: hidden;
+	display: none;
 }

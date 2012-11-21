@@ -52,10 +52,10 @@
 	
 	<div class="row">
 		<div class="span12">
-			<table id="resumen-alumno" class="table table-bordered">
+			<table class="table table-bordered cells-center">
 				<thead>
 					<tr>
-						<th>Asistencias</th>
+						<th>N° Asistencias</th>
 						<th>Nota acumulada</th>
 						<th>Otra nota</th>
 					</tr>
@@ -75,16 +75,20 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th class="td">Fecha</th>
-						<th class="td">Contenido visto</th>
-						<th class="td">Lugar</th>
-						<th class="td">Nota</th>	
+						<th>N°</th>
+						<th>Fecha</th>
+						<th>Contenido visto</th>
+						<th>Lugar</th>
+						<th>Nota</th>	
 					</tr>					
 				</thead>
 				<tbody>
 					{% for clase in asistencias  %}
 						<tr>
-							<td>{{clase.fecha}}</td>
+							<td>{{forloop.counter}}</td>
+							<td>
+								{{clase.fecha|date:"l d"|capfirst}} de {{clase.fecha|date:"F"|capfirst}} de {{clase.fecha|date:"Y"}}
+							</td>
 							<td>{{clase.descripcion}}</td>
 							<td>{{clase.nombre_lugar}}</td>
 							<td>
@@ -94,6 +98,10 @@
 									<span class="badge badge-important">No</span>
 								{% endif %}								
 							</td>
+						</tr>
+					{% empty %}
+						<tr>
+							<td style="text-align: center;" colspan="4">No has asistido a ninguna clase</td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -106,17 +114,27 @@
 			<table class="table">
 				<thead>
 					<tr>
+						<th>N°</th>
 						<th>Fecha</th>
 						<th>Contenido visto</th>
 						<th>Lugar</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>{{clase.fecha}}</td>
-						<td>{{clase.descripcion}}</td>
-						<td>{{clase.nombre_lugar}}</td>
-					</tr>
+					{% for i in inasistencias %}
+						<tr>
+							<td>{{forloop.counter}}</td>
+							<td>{{i.fecha}}</td>
+							<td>{{i.descripcion}}</td>
+							<td>{{i.nombre_lugar}}</td>
+						</tr>
+					{% empty %}
+						<tr>
+							<td style="text-align: center;" colspan="3">Has asistido a todas las clases</td>
+						</tr>
+					{% endfor %}
+					
+					
 				</tbody>
 			</table>
 		</div>

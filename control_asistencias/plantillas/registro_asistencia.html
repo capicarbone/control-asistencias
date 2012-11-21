@@ -45,11 +45,11 @@
 					</thead>
 					<tbody>											
 						{% for a in alumnos %}					
-							<tr>
-								<td>{{a.cedula}} </td>
-								<td>{{a.nombre}} {{a.apellido}}</td>
+							<tr class="alumno">
+								<td class="alumno_cedula">{{a.cedula}} </td>
+								<td class="alumno_nombre_completo">{{a.nombre}} {{a.apellido}}</td>
 								<td>
-									<input class="check_asistecia" type="checkbox" name="asistencia_{{a.id}}">
+									<input class="check_asistencia" type="checkbox" name="asistencia_{{a.id}}">
 								</td>
 								<td>
 									<input class="check_participacion" type="checkbox" name="participacion_{{a.id}}">
@@ -64,3 +64,7 @@
 	</form>
 		
 {% endblock contenido %}
+
+{% block js %}
+	<script src="{{STATIC_URL}}js/bb-busqueda_alumno.js"></script>
+{% endblock js %}

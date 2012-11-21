@@ -26,7 +26,11 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Cédula</th>
+						<th>
+							<span>
+								Cédula
+							</span>							
+						</th>
 						<th>Nombre y Apellido</th>							
 						<th>Asistencias</th>
 						<th>Acumulado</th>
@@ -55,7 +59,7 @@
 								</td>
 								<td>{{alumno.nota}}</td>
 								<td>
-									<a class="btn" href="{% url asist.views.consulta_alumno secciones.actual.numero alumno.id %}">
+									<a class="btn consulta_clase" href="{% url asist.views.consulta_alumno secciones.actual.numero alumno.id %}" rel="tooltip" data-title="Consulta tus clases">
 										<i class="icon-check"></i>
 									</a>	
 								</td>

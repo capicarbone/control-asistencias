@@ -12,7 +12,7 @@ RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 
 SEMANAS_TOTALES = 10
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
