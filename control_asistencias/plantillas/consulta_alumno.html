@@ -31,8 +31,12 @@
 {% block contenido %}
 
 	<div class="row">
-		<div class="span11">
-					
+		<div class="span12">
+			<h2 style="text-align: center">{{alumno.acum}} % </h2>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">					
 			{% if  alumno.acum <= 35 %}
 				<div class="progress progress-danger">									
 			{% elif alumno.acum < 80 %}
@@ -44,10 +48,7 @@
 			{% endif %}																	
 					<div class="bar" style="width: {{alumno.acum}}%"></div>
 				</div>
-		</div>		
-		<div class="span1">
-			<h3>{{alumno.acum}} % </h3>
-		</div>		
+		</div>						
 	</div>	
 	
 	<div class="row">
@@ -101,7 +102,7 @@
 						</tr>
 					{% empty %}
 						<tr>
-							<td style="text-align: center;" colspan="4">No has asistido a ninguna clase</td>
+							<td style="text-align: center;" colspan="5">No has asistido a ninguna clase</td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -130,7 +131,7 @@
 						</tr>
 					{% empty %}
 						<tr>
-							<td style="text-align: center;" colspan="3">Has asistido a todas las clases</td>
+							<td style="text-align: center;" colspan="4">Has asistido a todas las clases</td>
 						</tr>
 					{% endfor %}
 					

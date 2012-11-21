@@ -26,10 +26,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>
-							<span>
-								Cédula
-							</span>							
+						<th>							
+							Cédula												
 						</th>
 						<th>Nombre y Apellido</th>							
 						<th>Asistencias</th>
@@ -65,7 +63,10 @@
 								</td>
 								
 							</tr>
-														
+					{% empty %}		
+						<tr>
+							<td style="text-align: center;" colspan="5">Esta sección no posee alumnos.</td>	
+						</tr>										
 					{% endfor %} 
 				</tbody>
 			</table>				

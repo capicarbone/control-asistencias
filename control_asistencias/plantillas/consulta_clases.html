@@ -35,7 +35,7 @@
 				<tbody>
 					{% for c in clases  %}
 						<tr>
-							<td>{{c.fecha}}</td>
+							<td>{{c.fecha|date:"l d"|capfirst}} de {{c.fecha|date:"F"|capfirst}} de {{c.fecha|date:"Y"}}</td>
 							<td>{{c.nombre_lugar}}</td>
 							<td>{{c.descripcion}}</td>
 							<td>{{c.asistentes}}</td>							

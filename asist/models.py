@@ -4,6 +4,7 @@ from django.conf import settings
 
 from django.db import models
 from django.utils.encoding  import smart_unicode
+from managers import ClaseManager
 
 
 class Clase(models.Model):
@@ -18,6 +19,8 @@ class Clase(models.Model):
 	fecha = models.DateField( help_text="Fecha de realización de la clase.")
 	descripcion = models.TextField(blank=True, help_text="Cotenido visto en clase.")
 	lugar = models.CharField(max_length=1, choices=LUGARES, default="L" , help_text="Lugar de realización de la clase.")	
+
+	objects = ClaseManager()
 
 	def nombre_lugar(self):
 		for l in self.LUGARES:
