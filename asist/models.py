@@ -27,8 +27,12 @@ class Clase(models.Model):
 			if (l[0] == self.lugar):
 				return l[1]
 
+	def asignar_asistentes(self):
+		self.asistentes = Asistencia.objects.filter(clase=self.id).count()
+
 	def __unicode__(self):
 		return "Clases del %s" % (str(self.fecha))
+
 
 
 class Alumno(models.Model):
@@ -48,6 +52,7 @@ class Alumno(models.Model):
 
 	def __unicode__(self):
 		return smart_unicode("%s %s, Sec. %s " % (self.nombre, self.apellido, str(self.seccion.numero )))
+
 
 class Asistencia(models.Model):
 

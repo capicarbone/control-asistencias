@@ -5,7 +5,7 @@ from django.db import models
 
 class ClaseManager(models.Manager):
 
-	def clases_por_semanas(self):
+	def por_semanas(self):
 
 		"""Devuelve una lista donde cada elemento es una 
 		lista que contiene las clases dadas en una semana."""

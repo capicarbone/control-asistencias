@@ -1,4 +1,4 @@
-
+	
 .cells-center th,
 .cells-center td{
 	text-align: center;
@@ -7,4 +7,13 @@
 .no-visible, .tooltip-data{
 	visibility: hidden;
 	display: none;
+}
+
+.cabezera-azul th{
+	background-image: linear-gradient(bottom, rgb(77,182,227) 17%, rgb(104,196,242) 68%);
+	background-image: -o-linear-gradient(bottom, rgb(77,182,227) 17%, rgb(104,196,242) 68%);
+	background-image: -moz-linear-gradient(bottom, rgb(77,182,227) 17%, rgb(104,196,242) 68%);
+	background-image: -webkit-linear-gradient(bottom, rgb(77,182,227) 17%, rgb(104,196,242) 68%);
+	background-image: -ms-linear-gradient(bottom, rgb(77,182,227) 17%, rgb(104,196,242) 68%);
+	color: white;
 }

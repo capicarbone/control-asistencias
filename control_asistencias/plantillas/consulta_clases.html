@@ -20,47 +20,66 @@
 	
 	<div class="row">
 		<div class="span12">
-			<table class="table table-hover">
-				<thead>
+			<table class="table table-bordered">
+				<thead class="cabezera-azul">
 					<tr>
+						<th>N° Semana</th>
 						<th>Fecha</th>
 						<th>Lugar</th>
 						<th>Contenido revisado</th>
 						<th>N° Asistentes</th>
 						{% if admin %}
-							<th></th>	
+							<th>Opciones</th>	
 						{% endif %}						
 					</tr>
 				</thead>
 				<tbody>
-					{% for c in clases  %}
+					{% for semana in clases  %}
+						
 						<tr>
-							<td>{{c.fecha|date:"l d"|capfirst}} de {{c.fecha|date:"F"|capfirst}} de {{c.fecha|date:"Y"}}</td>
-							<td>{{c.nombre_lugar}}</td>
-							<td>{{c.descripcion}}</td>
-							<td>{{c.asistentes}}</td>							
-							{% if admin %}
-								<td>
-									<div class="btn-group">										
-										<a class="btn" href="{% url asist.views.registro_asistencias c.id %}">
-											<i class="icon-edit"></i>
-										</a>															
-										<button class="btn">
-											<i class="icon-signal"></i>										
-										</button>																
-										<button class="btn">											
-											<a href="{% url asist.views.registro_asistencias c.id %}" >
-												<i class="icon-remove">
-													
-												</i>
-											</a>
-
-										</button>										
-									</div>
-								</td>	
-							{% endif %}
+							<td rowspan="{{semana|length}}">
+								<h5>
+									Semana {{forloop.counter}}	
+								</h5>								
+							</td>
+						
+						{% for clase in semana %}						
+									
+								{% if not forloop.first %}
+									<tr>	
+								{% endif %}
+								
+															
+								<td>{{clase.fecha|date:"l d"|capfirst}} de {{clase.fecha|date:"F"|capfirst}} de {{clase.fecha|date:"Y"}}</td>
+								<td>{{clase.nombre_lugar}}</td>
+								<td>{{clase.descripcion}}</td>
+								<td style="text-align: center; font-size: 20px">
+									{{clase.asistentes}}
+								</td>							
+								{% if admin %}
+									<td>
+										<div class="btn-group">										
+											<a class="btn" href="{% url asist.views.registro_asistencias clase.id %}">
+												<i class="icon-edit"></i>
+											</a>															
+											<button class="btn">
+												<i class="icon-signal"></i>										
+											</button>													
+											<button class="btn">								
+												<a href="{% url asist.views.registro_asistencias clase.id %}" >
+													<i class="icon-remove">
+														
+													</i>
+												</a>
+											</button>										
+										</div>
+									</td>	
+								{% endif %}
+								
+							</tr>
 							
-						</tr>
+						{% endfor %}
+											
 					{% endfor %}
 				</tbody>
 			</table>

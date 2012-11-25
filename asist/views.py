@@ -49,11 +49,12 @@ def consultar_clases(request):
 	else:
 		claseForm = ClaseForm()
 
-	clases = Clase.objects.all()
+	clases = Clase.objects.por_semanas()
 	secciones = Seccion.objects.all()
 
-	for c in clases:
-		c.asistentes = Asistencia.objects.filter(clase=c.id).count()
+	for semana in clases:
+		for c in semana:
+			c.asignar_asistentes()
 	
 	user = request.user	
 
