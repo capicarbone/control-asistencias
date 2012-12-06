@@ -10,6 +10,11 @@ from forms import ClaseForm
 
 import random
 
+def inicio(request):
+	secciones = Seccion.objects.all()
+	return render_to_response('inicio.html', {'secciones': secciones},
+		context_instance=RequestContext(request))
+
 def seccion(request, offset):
 
 	s = Seccion.objects.get(numero=int(offset))
