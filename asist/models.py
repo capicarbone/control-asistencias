@@ -19,6 +19,7 @@ class Clase(models.Model):
 	fecha = models.DateField( help_text="Fecha de realización de la clase.")
 	descripcion = models.TextField(blank=True, help_text="Cotenido visto en clase.")
 	lugar = models.CharField(max_length=1, choices=LUGARES, default="L" , help_text="Lugar de realización de la clase.")	
+	valida = models.BooleanField(default=True, help_text='Especifique si es válida para notas.')
 
 	objects = ClaseManager()
 
@@ -45,9 +46,21 @@ class Alumno(models.Model):
 	asistencias = models.ManyToManyField(Clase, through='Asistencia')
 
 	def calcular_acumulado(self):
-		self.asistencias_total = Asistencia.objects.filter(alumno=self.id).filter(punto=True).count()
-		self.acum = int(self.asistencias_total*100 / settings.SEMANAS_TOTALES)
-		self.nota = int(self.asistencias_total*5/ settings.SEMANAS_TOTALES)
+		self.asistencias_total = Asistencia.objects.filter(alumno=self.id).filter(clase__valida=True).count()
+		self.puntos_total = Asistencia.objects.filter(alumno=self.id).filter(punto=True).count()
+		self.acum = int(self.puntos_total*100 / settings.SEMANAS_CONSUMIDAS)
+
+		if self.acum > 100:
+			self.acum = 100
+
+		self.nota = round(float(self.puntos_total*5) / float(settings.SEMANAS_TOTALES),1)
+		if self.nota > 5:
+			self.nota = 5.0
+
+		self.rendimiento = round(float(self.puntos_total*5) / float(settings.SEMANAS_CONSUMIDAS),1)
+
+		if self.rendimiento > 5:
+			self.rendimiento = 5.0
 
 
 	def __unicode__(self):

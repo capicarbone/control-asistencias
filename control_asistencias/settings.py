@@ -10,7 +10,8 @@ RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 
 # Número de semanas totales a evaluar. 
 
-SEMANAS_TOTALES = 10
+SEMANAS_TOTALES = 9
+SEMANAS_CONSUMIDAS = 3
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

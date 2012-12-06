@@ -10,7 +10,7 @@ class ClaseManager(models.Manager):
 		"""Devuelve una lista donde cada elemento es una 
 		lista que contiene las clases dadas en una semana."""
 
-		clases = self.all()
+		clases = self.all().order_by("fecha")
 
 		semanas = []
 		semana = []

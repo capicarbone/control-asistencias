@@ -44,7 +44,7 @@ def consultar_clases(request):
 		claseForm = ClaseForm(request.POST)		
 		if claseForm.is_valid():
 			nwClase = claseForm.save()		
-			return redirect('clase/asistencias/' + str(nwClase.id) )	
+			return redirect('clases/' + str(nwClase.id) +'/asistencias/' )	
 			
 	else:
 		claseForm = ClaseForm()
@@ -95,7 +95,7 @@ def consulta_alumno(request, id_seccion, id_alumno ):
 
 	secciones = Seccion.objects.all().order_by('numero')
 	alumno = Alumno.objects.get(pk=int(id_alumno))
-	alumno.calcular_acumulado()
+	alumno.calcular_acumulado()	
 
 	clases_asistidas = Clase.objects.filter(asistencia__alumno__id=alumno.id)
 
@@ -111,7 +111,8 @@ def consulta_alumno(request, id_seccion, id_alumno ):
 
 	return render_to_response('consulta_alumno.html', {'asistencias': clases_asistidas, 
 		'inasistencias': inasistencias, 'alumno': alumno, 'secciones': secciones, 
-		'seccion_num': id_seccion, 'num_semanas': settings.SEMANAS_TOTALES }, 
+		'seccion_num': id_seccion, 'num_semanas': settings.SEMANAS_TOTALES,
+		'num_semanas_consumidas' : settings.SEMANAS_CONSUMIDAS }, 
 		context_instance=RequestContext(request))
 
 

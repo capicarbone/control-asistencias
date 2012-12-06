@@ -52,19 +52,31 @@
 	</div>	
 	
 	<div class="row">
-		<div class="span12">
+		<div class="span6">
 			<table class="table table-bordered cells-center">
 				<thead>
 					<tr>
-						<th>N° Asistencias</th>
-						<th>Nota acumulada</th>
-						<th>Otra nota</th>
+						<th>Asistencias válidas</th>
+						<th>Puntos obtenidos</th>						
 					</tr>
 				</thead>
 				<tbody>
-					<td>{{alumno.asistencias_total}} / {{num_semanas}} </td>
-					<td>{{alumno.nota}} / 5</td>
-					<td></td>
+					<td>{{alumno.asistencias_total}} / {{num_semanas_consumidas}} </td>
+					<td>{{alumno.puntos_total}} / {{num_semanas_consumidas}} </td>
+				</tbody>
+			</table>
+		</div>	
+		<div class="span6">
+			<table class="table table-bordered cells-center">
+				<thead>
+					<tr>
+						<th>Rendimiento</th>
+						<th>Nota actual</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<td>{{alumno.rendimiento}} / 5</td>										
+					<td>{{alumno.nota}} / 5</td>					
 				</tbody>
 			</table>
 		</div>		
@@ -80,7 +92,8 @@
 						<th>Fecha</th>
 						<th>Contenido visto</th>
 						<th>Lugar</th>
-						<th>Nota</th>	
+						<th>Válida</th>
+						<th>Punto</th>	
 					</tr>					
 				</thead>
 				<tbody>
@@ -92,6 +105,15 @@
 							</td>
 							<td>{{clase.descripcion}}</td>
 							<td>{{clase.nombre_lugar}}</td>
+
+							<td>
+								{% if clase.valida %}
+									<span class="badge badge-success">Si</span>
+								{% else %}
+									<span class="badge badge-important">No</span>
+								{% endif %}								
+							</td>
+
 							<td>
 								{% if clase.punto %}
 									<span class="badge badge-success">Si</span>
@@ -109,6 +131,7 @@
 			</table>
 		</div>		
 	</div>
+	
 	<div class="row">
 		<div class="span12">
 			<h2>Clases no asistidias</h2>
@@ -119,15 +142,25 @@
 						<th>Fecha</th>
 						<th>Contenido visto</th>
 						<th>Lugar</th>
+						<th>Válida</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for i in inasistencias %}
 						<tr>
 							<td>{{forloop.counter}}</td>
-							<td>{{i.fecha}}</td>
+							<td>
+								{{i.fecha|date:"l d"|capfirst}} de {{i.fecha|date:"F"|capfirst}} de {{i.fecha|date:"Y"}}
+							</td>
 							<td>{{i.descripcion}}</td>
 							<td>{{i.nombre_lugar}}</td>
+							<td>
+								{% if i.valida %}
+									<span class="badge badge-success">Si</span>
+								{% else %}
+									<span class="badge badge-important">No</span>
+								{% endif %}								
+							</td>
 						</tr>
 					{% empty %}
 						<tr>
@@ -139,6 +172,21 @@
 				</tbody>
 			</table>
 		</div>
+
+		<div class="row">
+		<div class="span12 alert alert-info">	
+			<p>
+				<span class="label label-info">Notas</span> Una asistencia posee nota si aportaste de alguna forma a la clase ya sea, interviniendo, preguntas, realización de ejercicios, etc. La <strong>Nota actual</strong> se establece en base a {{num_semanas}} clases válidas totales para el semestre.
+			</p>			
+			<p>
+				<span class="label label-warning">Clases válidas</span> Las clases válidas son aquellas tomadas en cuenta para notas. Algunas clases pueden no ser tomadas en cuenta por alguna situación especial, por ejemplo, las tres primeras clases realizadas no son válidas debido a que no todas las secciones tenian horario ni se tenía estipulado el mecanismo de evaluación.
+			</p>	
+			<p>
+				<span class="label label-important">Recuperación de notas</span> Para recuperar nota en preparaduría o para optar por esta nota en caso de no haber podido asistir a ninguna debe solicitarse una prueba. Será realizada de acuerdo a los puntos faltantes.
+			</p>								
+		</div>
+	</div>
+
 	</div>	
 	
 	

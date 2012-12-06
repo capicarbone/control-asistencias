@@ -17,3 +17,10 @@
 	background-image: -ms-linear-gradient(bottom, rgb(77,182,227) 17%, rgb(104,196,242) 68%);
 	color: white;
 }
+
+.footer{
+	padding: 70px 0;
+	margin-top: 70px;
+	border-top: 1px solid #E5E5E5;
+	background-color: whiteSmoke;
+}
