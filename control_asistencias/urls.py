@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^seccion/(\d{1,2})/$', 'asist.views.seccion'),    
     url(r'^clases$', 'asist.views.consultar_clases'),
     url(r'^clases/(\d+)/asistencias/$', 'asist.views.registro_asistencias'),
+    url(r'^clases/(\d+)', 'asist.views.consulta_clase'),
     url(r'^seccion/(\d+)/alumno/(\d+)$', 'asist.views.consulta_alumno'),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

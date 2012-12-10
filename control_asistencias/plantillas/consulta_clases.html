@@ -62,16 +62,17 @@
 											<a class="btn" href="{% url asist.views.registro_asistencias clase.id %}">
 												<i class="icon-edit"></i>
 											</a>															
-											<button class="btn">
+											<a class="btn" href="{% url asist.views.consulta_clase clase.id %}">
+
 												<i class="icon-signal"></i>										
-											</button>													
-											<button class="btn">								
-												<a href="{% url asist.views.registro_asistencias clase.id %}" >
-													<i class="icon-remove">
-														
-													</i>
-												</a>
-											</button>										
+											</a>													
+																		
+											<a class="btn" href="{% url asist.views.registro_asistencias clase.id %}" >
+												<i class="icon-remove">
+													
+												</i>
+											</a>
+																				
 										</div>
 									</td>	
 								{% endif %}

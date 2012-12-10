@@ -121,6 +121,21 @@ def consulta_alumno(request, id_seccion, id_alumno ):
 		context_instance=RequestContext(request))
 
 
+def consulta_clase(request, id_clase):
+
+	secciones = Seccion.objects.all().order_by('numero')
+	clase = Clase.objects.get(id=int(id_clase))
+	asistencias = Asistencia.objects.select_related().filter(clase=clase).order_by('alumno__nombre')
+
+	clase.n_asistentes = asistencias.count()
+
+	return render_to_response('consulta_clase.html',
+		{'clase': clase, 'secciones': secciones, 'asistencias': asistencias},
+		context_instance=RequestContext(request))
+
+
+
+
 
 	
 
