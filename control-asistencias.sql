@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-12-2012 a las 17:35:47
+-- Tiempo de generación: 11-12-2012 a las 17:37:46
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.3.13
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `asist_asistencia` (
   UNIQUE KEY `asist_asistencia_alumno_id_90ea2_uniq` (`alumno_id`,`clase_id`),
   KEY `asist_asistencia_7e8dc332` (`alumno_id`),
   KEY `asist_asistencia_6290ba1d` (`clase_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=197 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=229 ;
 
 --
 -- Volcado de datos para la tabla `asist_asistencia`
@@ -304,7 +304,6 @@ INSERT INTO `asist_asistencia` (`id`, `alumno_id`, `clase_id`, `punto`) VALUES
 (116, 122, 14, 1),
 (117, 73, 14, 1),
 (118, 49, 14, 1),
-(119, 17, 14, 1),
 (120, 53, 14, 1),
 (121, 74, 14, 1),
 (122, 127, 14, 0),
@@ -329,7 +328,7 @@ INSERT INTO `asist_asistencia` (`id`, `alumno_id`, `clase_id`, `punto`) VALUES
 (141, 17, 15, 1),
 (142, 67, 15, 1),
 (143, 40, 15, 1),
-(144, 124, 15, 0),
+(144, 124, 15, 1),
 (145, 91, 15, 0),
 (146, 92, 15, 0),
 (147, 128, 15, 1),
@@ -354,7 +353,7 @@ INSERT INTO `asist_asistencia` (`id`, `alumno_id`, `clase_id`, `punto`) VALUES
 (166, 117, 16, 1),
 (167, 122, 16, 1),
 (168, 74, 16, 1),
-(169, 124, 16, 0),
+(169, 124, 16, 1),
 (170, 82, 16, 1),
 (171, 47, 16, 1),
 (172, 112, 16, 0),
@@ -381,7 +380,39 @@ INSERT INTO `asist_asistencia` (`id`, `alumno_id`, `clase_id`, `punto`) VALUES
 (193, 41, 17, 0),
 (194, 18, 17, 0),
 (195, 103, 17, 1),
-(196, 81, 17, 1);
+(196, 81, 17, 1),
+(197, 64, 18, 1),
+(198, 78, 18, 0),
+(199, 52, 18, 1),
+(200, 98, 18, 1),
+(201, 117, 18, 1),
+(202, 122, 18, 1),
+(203, 114, 18, 1),
+(204, 74, 18, 1),
+(205, 82, 18, 1),
+(206, 109, 18, 1),
+(207, 47, 18, 1),
+(208, 112, 18, 0),
+(209, 88, 18, 1),
+(210, 128, 18, 1),
+(211, 59, 18, 1),
+(212, 70, 19, 1),
+(213, 106, 19, 1),
+(214, 96, 19, 1),
+(215, 43, 19, 1),
+(216, 67, 19, 1),
+(217, 124, 19, 1),
+(218, 71, 19, 1),
+(219, 92, 19, 1),
+(220, 128, 19, 1),
+(221, 13, 19, 1),
+(222, 14, 19, 1),
+(223, 11, 19, 1),
+(224, 54, 19, 1),
+(225, 103, 19, 1),
+(226, 56, 19, 1),
+(227, 107, 18, 0),
+(228, 92, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -396,7 +427,7 @@ CREATE TABLE IF NOT EXISTS `asist_clase` (
   `lugar` varchar(1) NOT NULL,
   `valida` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `asist_clase`
@@ -411,7 +442,9 @@ INSERT INTO `asist_clase` (`id`, `fecha`, `descripcion`, `lugar`, `valida`) VALU
 (14, '2012-11-13', 'Apuntadores e introducción a memoria dinámica.', 'S', 1),
 (15, '2012-11-15', 'Apuntadores e introducción a memoria dinámica. Asesoría para el proyecto.', 'L', 1),
 (16, '2012-11-20', 'Introducción a listas.', 'L', 1),
-(17, '2012-11-22', 'Colas circulares.', 'L', 1);
+(17, '2012-11-22', 'Colas circulares.', 'L', 1),
+(18, '2012-12-04', 'Práctica de listas', 'L', 1),
+(19, '2012-12-06', 'Introducción a listas y práctica.', 'L', 1);
 
 -- --------------------------------------------------------
 
@@ -551,7 +584,7 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `is_staff`, `is_active`, `is_superuser`, `last_login`, `date_joined`) VALUES
-(1, 'capi', '', '', 'cpinelly@gmail.com', 'pbkdf2_sha256$10000$b0dTqE2rmSlN$9+0AVtxikMnHQyZmUhBv4kyBGrmmT9/sh+nkQaPIj2Y=', 1, 1, 1, '2012-12-05 14:06:02', '2012-11-09 04:11:10');
+(1, 'capi', '', '', 'cpinelly@gmail.com', 'pbkdf2_sha256$10000$b0dTqE2rmSlN$9+0AVtxikMnHQyZmUhBv4kyBGrmmT9/sh+nkQaPIj2Y=', 1, 1, 1, '2012-12-09 21:48:42', '2012-11-09 04:11:10');
 
 -- --------------------------------------------------------
 
@@ -796,10 +829,10 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('5c36aa2c50cc2926f2dfdc49a0c547e7', 'ZTcxNzg0YzEyNGI3ZjZiYjgzMjE3ZTBlYWMwZTY2ZWE1MzMxZDliNDqAAn1xAS4=\n', '2012-12-20 06:27:04'),
 ('b53b17ddc3369b75eb02a212171efbfe', 'MjM1YjA1MTE5ZjdkMDU3MDU4NDI0OGM0NjIzOTAzZTAwNWE1YzMyOTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n', '2012-12-08 22:28:37'),
 ('baf61c8ef1781c0f75cd1a17af004ae9', 'MjM1YjA1MTE5ZjdkMDU3MDU4NDI0OGM0NjIzOTAzZTAwNWE1YzMyOTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n', '2012-11-24 23:32:30'),
-('c7556b3e2a86a9e0bc2428ae4cc25f55', 'MjM1YjA1MTE5ZjdkMDU3MDU4NDI0OGM0NjIzOTAzZTAwNWE1YzMyOTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n', '2012-12-01 22:53:48');
+('c7556b3e2a86a9e0bc2428ae4cc25f55', 'MjM1YjA1MTE5ZjdkMDU3MDU4NDI0OGM0NjIzOTAzZTAwNWE1YzMyOTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n', '2012-12-01 22:53:48'),
+('d8f2cb52ed38e3a8195e979248be3ccf', 'ZTcxNzg0YzEyNGI3ZjZiYjgzMjE3ZTBlYWMwZTY2ZWE1MzMxZDliNDqAAn1xAS4=\n', '2012-12-24 14:21:28');
 
 -- --------------------------------------------------------
 
